@@ -12,16 +12,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Chat I Don't Know",
     description: 'ChatGPT 3.5-turbo model for entertaining use',
-    url: 'idontknowchat.vercel.app',
+    url: 'http://localhost:3000',
     siteName: "Chat I Don't Know",
     images: [
       {
-        url: 'idontknowchat.vercel.app/og-image-2.jpg', // Must be an absolute URL
+        url: 'http://localhost:3000/og-image-2.jpg', // Must be an absolute URL
         width: 800,
         height: 600,
       },
       {
-        url: 'idontknowchat.vercel.app/og-image-2.jpg', // Must be an absolute URL
+        url: 'http://localhost:3000/og-image-2.jpg', // Must be an absolute URL
         width: 1800,
         height: 1600,
         alt: 'My custom alt',

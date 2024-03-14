@@ -18,8 +18,7 @@ export default function InputField({userId,addOptimisticChat}:{userId?:string,ad
   const [isLoading,setIsLoading] = useState(false)
   // const {pending} = useFormStatus()
   const [pending,startMutation] = useTransition()
-  
-  
+ 
   const router = useRouter()
   const pathName = usePathname()
    useEffect(()=>{ 
@@ -31,7 +30,7 @@ export default function InputField({userId,addOptimisticChat}:{userId?:string,ad
   const handleSubmit = async (data: FormData) => {
     setIsLoading(true)
     const payload = Object.fromEntries(data.entries());
-    const eventParsed = await insertChatParams.safeParseAsync({userId,sessionId,role:"user",...payload});
+    const eventParsed = await insertChatParams.safeParseAsync({userId:userId,sessionId:sessionId,role:"user",...payload});
     if (!eventParsed.success) {
     console.log(eventParsed.error)
       return;
@@ -41,6 +40,7 @@ export default function InputField({userId,addOptimisticChat}:{userId?:string,ad
       id:"",
      ...values
     }
+    console.log(pendingChat)
     try {
       startMutation(async()=>{addOptimisticChat(pendingChat)
         const gptChat = await sendMes(values.message)
