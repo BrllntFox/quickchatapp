@@ -4,10 +4,7 @@ import { cn } from "@/lib/utils";
 import { Card } from "@nextui-org/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {  useSearchParams  } from "next/navigation";
-// import { Chats } from "./History";
-import { useNoInitialEffect } from "@/lib/effect";
 import { Chat } from "@/lib/db/schema/chats";
-import { useOptimisticChats } from "./useOptimisticChats";
 
 const replaceNewlinesWithBreaks = (text: string | null) => {
   return text?.split("\\n").map((line, i) => (
