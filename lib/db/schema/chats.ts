@@ -1,11 +1,10 @@
-import { sql } from "drizzle-orm";
 import { text, sqliteTable } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
 import { type getChats } from "@/lib/api/chats/queries";
 
-import { nanoid, timestamps } from "@/lib/utils";
+import { nanoid } from "@/lib/utils";
 
 
 export const chats = sqliteTable('chats', {
@@ -13,15 +12,14 @@ export const chats = sqliteTable('chats', {
   userId: text("user_id").notNull(),
   sessionId: text("session_id").notNull(),
   role: text("role").notNull(),
-  message: text("message").notNull(),
-  
-
+  message: text("message").notNull()
 });
 
 
 // Schema for chats - used to validate API requests
 const baseSchema = createSelectSchema(chats)
-export const insertChatSchema = createInsertSchema(chats)
+
+export const insertChatSchema = createInsertSchema(chats);
 export const insertChatParams = baseSchema.extend({}).omit({ 
   id: true
 });

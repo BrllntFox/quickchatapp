@@ -28,7 +28,7 @@ export const updateChat = async (id: ChatId, chat: UpdateChatParams) => {
   try {
     const [c] =  await db
      .update(chats)
-     .set({...newChat})
+     .set(newChat)
      .where(eq(chats.id, chatId!))
      .returning();
     return { chat: c };

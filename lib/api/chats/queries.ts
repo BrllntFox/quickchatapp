@@ -16,10 +16,9 @@ export const getChatById = async (id: ChatId) => {
   return { chat: c };
 };
 
-
 export const getChatByUser = async (id:string) => {
-  const rows  = await db.select().from(chats).where(eq(chats.userId,id))
-  if (rows === undefined ) return {}
-  const c = rows
+  const rows = await db.select().from(chats).where(eq(chats.id, id));
+  if (rows===undefined) return {}
+  const c  = rows 
   return {chats:c}
 }
