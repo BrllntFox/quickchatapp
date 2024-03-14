@@ -28,7 +28,7 @@ export const updateChat = async (id: ChatId, chat: UpdateChatParams) => {
   try {
     const [c] =  await db
      .update(chats)
-     .set({...newChat, updatedAt: new Date().toISOString().slice(0, 19).replace("T", " ") })
+     .set({...newChat})
      .where(eq(chats.id, chatId!))
      .returning();
     return { chat: c };
