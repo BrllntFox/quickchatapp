@@ -52,7 +52,7 @@ export const checkAuth = async () => {
    const kindeId = session.user.id
    if (session && kindeId) {
     try {
-      const {user} = await getUserByKindeId(kindeId);
+      const user = await getUserByKindeId(kindeId);
       if (!user) {
         await createUser({
           kindeId: kindeId,
