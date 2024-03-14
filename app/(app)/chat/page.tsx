@@ -14,16 +14,14 @@ import { useOptimisticChats } from "@/components/chat/useOptimisticChats";
 import ChatSection from "./ChatSection";
 import ClientLogout from "@/components/shared/ClientLogout";
 
-const ChatPage = async ({ params }: { params: { id: string } }) => {
+const ChatPage = async () => {
   const { session } = await getUserAuth();
   const user_image = session?.user.picture as string;
-  const kindeId = session?.user.id as string;
+  const kindeId = session?.user.id as string
   const user = await getUserByKindeId(kindeId);
   const userId = user.user?.id;
-  const chats = userId && (await getChatByUser(userId))?.chats;
-  const chatList =
-    typeof chats === "string" || chats === undefined ? [] : chats;
-
+  const chats = userId && (await getChatByUser(userId)).chats;
+  const chatList = chats && typeof chats !== "string" ? chats : [];
   return (
     <div className="flex flex-col md:flex-row h-[90vh] md:h-full w-full items-center justify-center">
       <div

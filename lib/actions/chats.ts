@@ -26,7 +26,7 @@ const handleErrors = (e: unknown) => {
   return errMsg;
 };
 
-const revalidateChats = () => revalidatePath("/chats");
+const revalidateChats = () => revalidatePath("/chat");
 
 export const createChatAction = async (input: NewChatParams) => {
   try {
