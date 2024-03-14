@@ -17,8 +17,8 @@ import { getUserDataByKindeId } from "@/lib/actions/users";
 
 const ChatPage = async () => {
   const { session } = await getUserAuth();
-  const user_image = session?.user.picture as string;
-  const kindeId = session?.user.id as string
+  const user_image = session?.user.picture ||'';
+  const kindeId = session?.user.id ||""
   const user = await getUserDataByKindeId(kindeId);
   const userId =user.id
   const chats = await getChatDataByUserId(userId);
