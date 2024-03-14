@@ -14,6 +14,7 @@ import {
   insertUserParams,
   updateUserParams,
 } from "@/lib/db/schema/users";
+import { getUserByKindeId } from "../api/users/queries";
 
 const handleErrors = (e: unknown) => {
   const errMsg = "Error, please try again.";
@@ -56,3 +57,15 @@ export const deleteUserAction = async (input: UserId) => {
     return handleErrors(e);
   }
 };
+
+export const getUserDataByKindeId = async (id:string) => {
+  try {
+    if (!id) {throw new Error("Kinde User Id is required")};
+    const userData = await getUserByKindeId(id);
+    if(!userData||typeof userData === "undefined") throw new Error("User Data is not available");
+    return userData.user
+  } catch (error) {
+    console.error("Error fetching user data:",error)
+    return {id:""}
+  }
+}

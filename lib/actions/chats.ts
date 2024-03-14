@@ -67,3 +67,19 @@ export const getChatMessageByUser = async (user_id:string) => {
     return handleErrors(e)
   }
 }
+
+export const getChatDataByUserId= async(userId:string)=> {
+  try {
+     if (!userId) {
+       throw new Error('User ID is required');
+     }
+     const chatData = await getChatByUser(userId);
+     if (!chatData || typeof chatData.chats === 'undefined') {
+       throw new Error('Chat data is not available');
+     }
+     return chatData.chats;
+  } catch (error) {
+     console.error('Error fetching chats:', error);
+     return []; // Return an empty array as a fallback
+  }
+ }

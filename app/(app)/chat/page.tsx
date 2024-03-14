@@ -5,7 +5,7 @@ import { checkAuth, getUserAuth } from "@/lib/auth/utils";
 import { ScrollShadow } from "@nextui-org/react";
 
 import React from "react";
-import { getChatMessageByUser } from "@/lib/actions/chats";
+import { getChatMessageByUser, getChatDataByUserId } from "@/lib/actions/chats";
 import UserButton from "@/components/chat/UserButton";
 import { History } from "@/components/chat/History";
 import { getUserByKindeId } from "@/lib/api/users/queries";
@@ -13,15 +13,16 @@ import { getChatByUser } from "@/lib/api/chats/queries";
 import { useOptimisticChats } from "@/components/chat/useOptimisticChats";
 import ChatSection from "./ChatSection";
 import ClientLogout from "@/components/shared/ClientLogout";
+import { getUserDataByKindeId } from "@/lib/actions/users";
 
 const ChatPage = async () => {
   const { session } = await getUserAuth();
   const user_image = session?.user.picture as string;
   const kindeId = session?.user.id as string
-  const user = await getUserByKindeId(kindeId);
-  const userId = user.user?.id;
-  const chats = userId && (await getChatByUser(userId)).chats;
-  const chatList = chats && typeof chats !== "string" ? chats : [];
+  const user = await getUserDataByKindeId(kindeId);
+  const userId =user.id
+  const chats = await getChatDataByUserId(userId);
+  
   return (
     <div className="flex flex-col md:flex-row h-[90vh] md:h-full w-full items-center justify-center">
       <div
@@ -33,10 +34,10 @@ const ChatPage = async () => {
       <ChatSection
         userId={userId}
         userImage={user_image}
-        chats={chatList}
+        chats={chats}
         session={session}
       >
-        <UserButton session={session} chats={chatList}>
+        <UserButton session={session} chats={chats}>
           <ClientLogout />
         </UserButton>
       </ChatSection>

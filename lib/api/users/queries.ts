@@ -26,7 +26,7 @@ export const getUserByKindeId = async(id: string) => {
     }
   }
   const [row] = await db.select().from(users).where(eq(users.kindeId, id));
-  if (row === undefined) return {status:"failed"};
+  if (row === undefined) return null;
   const u = row
   return {user:u}
 }
