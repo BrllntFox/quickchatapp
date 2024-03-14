@@ -1,0 +1,40 @@
+import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { z } from "zod";
+
+import { type getUsers } from "@/lib/api/users/queries";
+
+import { nanoid } from "@/lib/utils";
+
+
+export const users = sqliteTable('users', {
+  id: text("id").primaryKey().$defaultFn(() => nanoid()),
+  kindeId: text("kinde_id").notNull(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  picture: text("picture")
+});
+
+
+// Schema for users - used to validate API requests
+const baseSchema = createSelectSchema(users)
+
+export const insertUserSchema = createInsertSchema(users);
+export const insertUserParams = baseSchema.extend({}).omit({ 
+  id: true
+});
+
+export const updateUserSchema = baseSchema;
+export const updateUserParams = baseSchema.extend({})
+export const userIdSchema = baseSchema.pick({ id: true });
+
+// Types for users - used to type API request params and within Components
+export type User = typeof users.$inferSelect;
+export type NewUser = z.infer<typeof insertUserSchema>;
+export type NewUserParams = z.infer<typeof insertUserParams>;
+export type UpdateUserParams = z.infer<typeof updateUserParams>;
+export type UserId = z.infer<typeof userIdSchema>["id"];
+    
+// this type infers the return from getUsers() - meaning it will include any joins
+export type CompleteUser = Awaited<ReturnType<typeof getUsers>>["users"][number];
+
