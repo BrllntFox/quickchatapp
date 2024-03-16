@@ -4,6 +4,8 @@ import { TextGenerateEffect } from '../shared/TextGenerateEffect'
 import { AuthSession } from '@/lib/auth/utils'
 import { redirect, usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import { CldImage, CldOgImage } from 'next-cloudinary'
 
 const ChatHero = ({type}:{type?:string}) => {
  const  isHome = type === 'home'

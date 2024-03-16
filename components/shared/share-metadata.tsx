@@ -1,1 +1,12 @@
-export const openGraphImage = { images: ['https://asset.cloudinary.com/diiy0vfg1/e26483b11c8563d025f15c941745899f'] }
+import { getCldOgImageUrl } from 'next-cloudinary';
+export const openGraphImage = { images: [
+    {
+      // Prefer a different size? Be sure to update the width and height of the
+      // metadata as well as the image configuration of getCldOgImageUrl
+      width: 1200,
+      height: 630,
+      url: "https://res.cloudinary.com/diiy0vfg1/image/upload/v1710599919/i-dont-know-og_z3qt0f.jpg",   
+  
+    }
+  ]}
+
