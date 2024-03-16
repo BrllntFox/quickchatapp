@@ -14,14 +14,17 @@ import { useOptimisticChats } from "@/components/chat/useOptimisticChats";
 import ChatSection from "./ChatSection";
 import ClientLogout from "@/components/shared/ClientLogout";
 import { getUserDataByKindeId } from "@/lib/actions/users";
+import { unstable_noStore } from "next/cache";
+import { getNewChatsDataByUserId } from "@/lib/actions/newChats";
 
 const ChatPage = async () => {
+  unstable_noStore()
   const { session } = await getUserAuth();
   const user_image = session?.user.picture ||'';
   const kindeId = session?.user.id ||""
   const user = await getUserDataByKindeId(kindeId);
   const userId =user.id
-  const chats = await getChatDataByUserId(userId);
+  const chats = await getNewChatsDataByUserId(userId);
   
   return (
     <div className="flex flex-col md:flex-row h-[90vh] md:h-full w-full items-center justify-center">

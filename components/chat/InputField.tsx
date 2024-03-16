@@ -10,6 +10,7 @@ import { createChat } from "@/lib/api/chats/mutations";
 import { usePathname, useRouter } from "next/navigation";
 import { createChatAction } from "@/lib/actions/chats";
 import { sendMes } from "@/lib/actions/gpt.actions";
+import { createNewChatAction } from "@/lib/actions/newChats";
 
 
 export default function InputField({userId,addOptimisticChat}:{userId?:string,addOptimisticChat:any}) {
@@ -50,8 +51,8 @@ export default function InputField({userId,addOptimisticChat}:{userId?:string,ad
           role:"chatIDK",
           message:gptChat?.data || "I don't know'"
         }
-          await createChatAction(values)
-          await createChatAction(gptMessage)
+          await createNewChatAction(values)
+          await createNewChatAction(gptMessage)
         
       })
     } catch (err) {console.log(err);}

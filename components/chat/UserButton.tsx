@@ -15,28 +15,28 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { AuthSession } from "@/lib/auth/utils";
 import { Chat } from "@/lib/db/schema/chats";
 import { useRouter } from "next/navigation";
-import { TruncatedString } from "@/lib/utils";
+import { TruncatedString, calculateDaysDifference } from "@/lib/utils";
 
 const UserButton = ({
   session,
   children,
-  chats
+  chats,
 }: {
   session?: AuthSession["session"];
   children: React.ReactNode;
-  chats:Chat[]
+  chats: Chat[];
 }) => {
-  const router = useRouter()
+  const router = useRouter();
   const uniqBy = (arr: Chat[], selector: (item: Chat) => any) => {
     const map = new Map();
     arr.forEach((item) => {
-       const prop = selector(item);
-       if (!map.has(prop)) map.set(prop, item);
+      const prop = selector(item);
+      if (!map.has(prop)) map.set(prop, item);
     });
     return [...map.values()];
-   };
-   
-   const uniqueChats = uniqBy(chats, (chat) => chat.sessionId);
+  };
+
+  const uniqueChats = uniqBy(chats, (chat) => chat.sessionId);
 
   return (
     <div>
@@ -68,36 +68,29 @@ const UserButton = ({
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup className="overflow-auto max-h-[30vh]">
-
- {uniqueChats
-          .reverse()
-          .map((chat) => 
-            (
+            {uniqueChats.reverse().map((chat) => (
               <DropdownMenuItem
                 key={chat.id}
                 className="flex flex-col items-start gap-1"
-                onSelect={()=>  
-                  {   
-                  router.replace(`/chat?s_id=${chat.sessionId.replace(/^"|"$/g, '')}`)}
-                }
+                onSelect={() => {
+                  router.replace(
+                    `/chat?s_id=${chat.sessionId.replace(/^"|"$/g, "")}`
+                  );
+                }}
               >
-                {/* <p className="self-start font-light text-sm">
-                  {calculateDaysDifference(c) > 0
+                <p className="self-start font-light text-sm">
+                  {calculateDaysDifference(chat.createdAt) > 0
                     ? `${calculateDaysDifference(chat.createdAt)} days ago`
                     : "Today"}
-                </p> */}
+                </p>
                 <div className="flex items-start justify-start">
                   {TruncatedString({ text: chat.message.trim(), limit: 60 })}
                 </div>
               </DropdownMenuItem>
-            ) )}
-          
-          
-                    </DropdownMenuGroup>
+            ))}
+          </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            {children}
-          </DropdownMenuItem>
+          <DropdownMenuItem>{children}</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

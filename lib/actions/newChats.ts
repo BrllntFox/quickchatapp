@@ -14,6 +14,7 @@ import {
   insertNewChatParams,
   updateNewChatParams,
 } from "@/lib/db/schema/newChats";
+import { getNewChatByUserId } from "../api/newChats/queries";
 
 const handleErrors = (e: unknown) => {
   const errMsg = "Error, please try again.";
@@ -56,3 +57,19 @@ export const deleteNewChatAction = async (input: NewChatId) => {
     return handleErrors(e);
   }
 };
+
+export const getNewChatsDataByUserId = async (userId:string) => {
+  try {
+    if (!userId) {
+      throw new Error('User ID is required');
+    }
+    const chatData = await getNewChatByUserId(userId);
+    if (!chatData || typeof chatData.newChats === 'undefined') {
+      throw new Error('Chat data is not available');
+    }
+    return chatData.newChats;
+ } catch (error) {
+    console.error('Error fetching chats:', error);
+    return []; // Return an empty array as a fallback
+ }
+}

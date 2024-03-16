@@ -17,3 +17,11 @@ export const getNewChatById = async (id: NewChatId) => {
 };
 
 
+export const getNewChatByUserId = async (id:string) => {
+  const {id:newChatId} = newChatIdSchema.parse({
+    id
+  })
+  const rows = await db.select().from(newChats).where(eq(newChats.userId,id))
+  const n =rows
+  return {newChats:n}
+}
