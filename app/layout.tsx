@@ -15,7 +15,10 @@ export const metadata: Metadata = {
       title: "I Don't Know ChatApp",
       url:"idontknowchat.vercel.app ",
       siteName: 'IDontKnow',
+      locale: 'vi_VN',
+      type: 'website',
     },
+    
   }  
 ;
 
