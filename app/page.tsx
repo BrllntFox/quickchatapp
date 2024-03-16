@@ -1,4 +1,3 @@
-import ChatBox from "@/components/chat/ChatBox";
 import ChatHero from "@/components/chat/ChatHero";
 import {  getUserAuth } from "@/lib/auth/utils";
 
@@ -15,7 +14,7 @@ const ChatPage = async ({ params }: { params: { id: string } }) => {
   }
   return (
     <div className="flex flex-col h-[90vh] md:h-[100vh] w-full items-center justify-center gap-1">
-      <ChatHero />
+      <ChatHero type="home"/>
       <SignIn type="home"/>
     </div>
   );

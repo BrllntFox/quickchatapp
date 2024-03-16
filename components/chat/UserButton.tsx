@@ -42,8 +42,8 @@ const UserButton = ({
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8">
+          <Button variant="ghost" className="relative h-8 w-8 md:w-12 md:h-12 rounded-full">
+            <Avatar className="h-8 md:h-12 w-8 md:w-12">
               <AvatarImage
                 src={JSON.stringify(session?.user.picture).replace(
                   /^"|"$/g,

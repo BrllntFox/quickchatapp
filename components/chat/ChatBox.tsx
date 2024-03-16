@@ -45,7 +45,7 @@ const ChatBox = ({ user_image, optimisticChats }: { user_image: string,optimisti
                 }, mx-2 gap-2 items-center`
               )}
             >
-              <Avatar>
+              <Avatar className="w-12 h-12">
                 <AvatarImage
                   src={chat.role === "chatIDK" ? idkava : user_image}
                   alt="@shadcn"

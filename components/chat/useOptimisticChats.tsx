@@ -11,7 +11,7 @@ export const useOptimisticChats = (
       currentState: CompleteChat[],
       newChat: CompleteChat
     ): CompleteChat[] => {
-      return [newChat,...currentState]
+      return [...currentState,newChat]
       }
   )
 

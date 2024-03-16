@@ -18,7 +18,7 @@ import { unstable_noStore } from "next/cache";
 import { getNewChatsDataByUserId } from "@/lib/actions/newChats";
 
 const ChatPage = async () => {
-  unstable_noStore()
+  
   const { session } = await getUserAuth();
   const user_image = session?.user.picture ||'';
   const kindeId = session?.user.id ||""
@@ -27,13 +27,14 @@ const ChatPage = async () => {
   const chats = await getNewChatsDataByUserId(userId);
   
   return (
-    <div className="flex flex-col md:flex-row h-[90vh] md:h-full w-full items-center justify-center">
+    <div className="flex flex-col gap-3 md:flex-row h-[90vh] md:h-full w-full items-center justify-center">
       <div
-        className="basis-1/3 flex justify-between md:flex-grow md:flex-col items-center md:mx-auto pt-4 md:pt-0 md:justify-center
-       w-10/12 md:w-full h-[10vh] md:h-[100vh] "
+        className=" md:basis-1/3 flex justify-start md:flex-grow md:flex-col items-center md:mx-auto pt-4 md:pt-0 md:justify-center
+        w-full md:w-full h-[10vh] md:h-[100vh] "
       >
         <ChatHero />
       </div>
+      <div className="relative h-[85vh] pt-8 md:pt-0 md:h-full basis-2/3 flex flex-col items-center mx-auto gap-8 w-full">
       <ChatSection
         userId={userId}
         userImage={user_image}
@@ -44,7 +45,7 @@ const ChatPage = async () => {
           <ClientLogout />
         </UserButton>
       </ChatSection>
-
+      </div>
       {/* <div className="h-[10vh] md:h-[0vh] md:hidden"> */}
     </div>
   );

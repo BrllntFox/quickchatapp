@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import {
   createNewChat,
   deleteNewChat,
@@ -59,6 +59,8 @@ export const deleteNewChatAction = async (input: NewChatId) => {
 };
 
 export const getNewChatsDataByUserId = async (userId:string) => {
+  unstable_noStore()
+ 
   try {
     if (!userId) {
       throw new Error('User ID is required');

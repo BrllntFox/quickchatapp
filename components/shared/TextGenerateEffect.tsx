@@ -21,7 +21,7 @@ export const TextGenerateEffect = ({
       },
       {
         duration: 2,
-        delay: stagger(0.2),
+        delay: stagger(0.03),
       }
     );
   }, [animate]);
@@ -46,7 +46,7 @@ export const TextGenerateEffect = ({
   return (
     <div className={cn("font-bold", className)}>
       <div className="">
-        <div className=" dark:text-white text-black text-2xl leading-snug tracking-wide flex flex-row">
+        <div className=" dark:text-white text-black text-3xl leading-snug tracking-wide flex flex-row">
           {renderWords()}
         </div>
       </div>

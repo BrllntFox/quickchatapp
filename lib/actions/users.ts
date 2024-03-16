@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import {
   createUser,
   deleteUser,
@@ -59,6 +59,7 @@ export const deleteUserAction = async (input: UserId) => {
 };
 
 export const getUserDataByKindeId = async (id:string) => {
+  unstable_noStore()
   try {
     if (!id) {throw new Error("Kinde User Id is required")};
     const userData = await getUserByKindeId(id);
