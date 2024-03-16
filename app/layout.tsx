@@ -13,9 +13,10 @@ export const metadata: Metadata = {
     openGraph: {
       ...openGraphImage,
       title: "I Don't Know ChatApp",
+      url:"idontknowchat.vercel.app ",
+      siteName: 'IDontKnow',
     },
-  }
-
+  }  
 ;
 
 export default function RootLayout({
