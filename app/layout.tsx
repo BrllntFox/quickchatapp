@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Providers } from "./providers";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -46,7 +46,7 @@ export default function RootLayout({
           defaultTheme="light"     
           disableTransitionOnChange
         >
-          <Providers>{children}</Providers>
+          <Providers>{children}<SpeedInsights/></Providers>
         </ThemeProvider>
       </body>
     </html>
